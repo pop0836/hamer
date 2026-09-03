@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BG9KJG China</title>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+}
+body {
+    background-color: #f3f6fa;
+    color: #222;
+    line-height: 1.7;
+    padding: 20px;
+}
+.container {
+    max-width: 920px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(30, 60, 100, 0.1);
+    overflow: hidden;
+}
+.header-bar {
+    background: linear-gradient(135deg, #2c4a70, #3a6090);
+    color: #fff;
+    padding: 22px 30px;
+}
+.header-bar h1 {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+.header-bar .sub-title {
+    opacity: 0.85;
+    font-size: 15px;
+    margin-top: 6px;
+}
+.nav-bar {
+    background: #233b58;
+    display: flex;
+    flex-wrap: wrap;
+}
+.nav-bar a {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 15px;
+}
+.nav-bar a:hover {
+    background: #3a5880;
+    color: #fff;
+}
+.nav-bar a.active {
+    background: #3a6090;
+    color: #ffffff;
+}
+.section {
+    padding: 24px 30px;
+    border-bottom: 1px solid #e4e9f0;
+}
+.section:last-child {
+    border-bottom: none;
+}
+.section h2 {
+    color: #2c4a70;
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+.tip-text {
+    background: #f0f6ff;
+    padding: 10px 14px;
+    border-left: 4px solid #4477bb;
+    margin: 16px 0;
+    font-size: 14px;
+}
+
+/* ===== 通联日志表格 强制边框 ===== */
+.log-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #99a8bc;
+}
+.log-table th {
+    border: 1px solid #99a8bc;
+    background-color: #e8eff8;
+    color: #2c4a70;
+    padding: 10px 8px;
+}
+.log-table td {
+    border: 1px solid #99a8bc;
+    padding: 9px 8px;
+}
+.log-table tbody tr:nth-child(even) {
+    background-color: #f7f9fc;
+}
+
+/* ===== 相册样式修复 ===== */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top:12px;
+}
+.photo-item {
+    border: 1px solid #d8dee8;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f8fafc;
+}
+.photo-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display:block;
+}
+.photo-caption {
+    padding: 8px 10px;
+    font-size:13px;
+    color:#444;
+}
+
+footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 13px;
+    color: #777;
+    background: #f7f9fc;
+}
+.iframe-hint{
+    background:#fff3cd;
+    border-left:4px solid #ffc107;
+    padding:10px 20px;
+    font-size:13px;
+}
+.note-small{
+    margin-top:12px;font-size:14px;color:#555;
+}
+.list-group {
+    list-style: none;
+}
+.list-group li {
+    padding: 6px 0;
+    font-size: 15px;
+}
+.list-group li::before {
+    content: "- ";
+    color: #3a6090;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .header-bar {
+        padding: 16px 20px;
+    }
+    .section {
+        padding: 18px 20px;
+    }
+    .nav-bar a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    .log-table th,
+    .log-table td {
+        padding: 6px 4px;
+        font-size: 12px;
+    }
+    .photo-item img {
+        height:140px;
+    }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="iframe-hint">
+⚠️ QRZ内嵌iframe沙箱环境，完整功能建议：在新标签打开完整页面
+</div>
+<div class="header-bar">
+<h1>BG9KJG China</h1>
+<div class="sub-title">QRZ‑Style Personal Station Page | Amateur Radio</div>
+</div>
+<div class="nav-bar">
+<a href="index.html" >首页</a>
+<a href="about.html" >关于</a>
+<a href="qsl.html" class="active">换卡 QSL</a>
+<a href="log.html" >通联日志</a>
+<a href="gallery.html" >相册</a>
+</div>
+
+<div class="section">
+<h2>QSL卡片交换说明</h2>
+<div class="tip-text">
+请尽量使用回邮信封+邮票，直接寄来我会尽量回卡。
+</div>
+<ul style="padding-left:22px;">
+<li>呼号：BG9KJG</li>
+<li>QSL方式：直寄(DIR)，暂无QSL管理局</li>
+<li>e‑QSL：支持eQSL.cc</li>
+<li>QRZ：支持QRZ Logbook</li>
+</ul>
+<br>
+<p>邮寄地址：甘肃省天水市秦州区中心广场金龙大厦八楼  邮编：741000  李先生收</p>
+</div>
+<div class="section">
+<h2>换卡提示</h2>
+<p>1. 直寄请附带SAE回邮信封与足额邮票，无回邮条件不保证实卡回寄。</p>
+<p>2. FT‑8数字通联优先e‑QSL确认。</p>
+<p>3. 卡片处理周期：1‑3个月。</p>
+</div>
+
+<footer>BG9KJG China Amateur Radio Station</footer>
+</div>
+</body>
+</html>
