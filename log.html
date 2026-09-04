@@ -13,17 +13,79 @@
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
 body {
-    background-color: #f3f6fa;
+    position: relative;
+    background-color: #0b1020;
     color: #222;
     line-height: 1.7;
-    padding: 20px;
+    padding: 20px 0;
+    min-height: 100vh;
 }
+
+/* 动态星空背景 */
+.stars {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px);
+    background-size: 120px 120px, 80px 80px, 60px 60px;
+    background-position: 0 0, 40px 60px, 20px 80px;
+    animation: starDrift 60s linear infinite;
+}
+
+.stars::before,
+.stars::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.stars::before {
+    background:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px);
+    background-size: 90px 90px, 50px 50px;
+    background-position: 30px 50px, 70px 20px;
+    animation: starTwinkle 8s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.stars::after {
+    background:
+        radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: starDrift 40s linear infinite reverse;
+    opacity: 0.5;
+}
+
+@keyframes starDrift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100px, 60px); }
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
 .container {
+    position: relative;
+    z-index: 1;
     max-width: 920px;
     margin: 0 auto;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(30, 60, 100, 0.1);
+    box-shadow: 0 2px 12px rgba(0,0,0, 0.4);
     overflow: hidden;
 }
 .header-bar {
@@ -131,12 +193,6 @@ footer {
     color: #777;
     background: #f7f9fc;
 }
-.iframe-hint{
-    background:#fff3cd;
-    border-left:4px solid #ffc107;
-    padding:10px 20px;
-    font-size:13px;
-}
 .note-small{
     margin-top:12px;font-size:14px;color:#555;
 }
@@ -153,9 +209,9 @@ footer {
     font-weight: bold;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 10px 0;
     }
     .header-bar {
         padding: 16px 20px;
@@ -169,8 +225,8 @@ footer {
     }
     .log-table th,
     .log-table td {
-        padding: 6px 4px;
-        font-size: 12px;
+        padding: 5px 3px;
+        font-size: 11px;
     }
     .photo-item img {
         height:140px;
@@ -180,10 +236,8 @@ footer {
 </style>
 </head>
 <body>
+<div class="stars"></div>
 <div class="container">
-<div class="iframe-hint">
-⚠️ 个人主页，还在学习建设，会不断完善。
-</div>
 <div class="header-bar">
 <h1>BG9KJG China</h1>
 <div class="sub-title">QRZ‑Style Personal Station Page | Amateur Radio</div>
@@ -203,6 +257,7 @@ footer {
 <tr>
 <th>日期时间</th>
 <th>对方呼号</th>
+<th>国家</th>
 <th>波段</th>
 <th>模式</th>
 <th>RST</th>
@@ -211,243 +266,273 @@ footer {
 <tbody>
 
 <tr>
-<td>2026-09-02 23:59</td>
-<td>BH3MPM</td>
+<td>2026-09-03 23:29</td>
+<td>BD4VNB</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-8--11</td>
+<td>-16 / -21</td>
+</tr>
+
+<tr>
+<td>2026-09-03 23:27</td>
+<td>BA3NZ</td>
+<td>中国</td>
+<td>20m</td>
+<td>FT8</td>
+<td>-15 / -19</td>
+</tr>
+
+<tr>
+<td>2026-09-02 23:59</td>
+<td>BH3MPM</td>
+<td>中国</td>
+<td>20m</td>
+<td>FT8</td>
+<td>-8 / -11</td>
 </tr>
 
 <tr>
 <td>2026-09-01 13:27</td>
 <td>BH8UKJ</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-12--19</td>
+<td>-12 / -19</td>
 </tr>
 
 <tr>
 <td>2026-09-01 12:48</td>
 <td>BH4THI</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-12--20</td>
+<td>-12 / -20</td>
 </tr>
 
 <tr>
 <td>2026-08-26 13:10</td>
 <td>BG4UCZ</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-12--15</td>
+<td>-12 / -15</td>
 </tr>
 
 <tr>
 <td>2026-08-26 13:06</td>
 <td>BG7MOM</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-9--16</td>
+<td>-9 / -16</td>
 </tr>
 
 <tr>
 <td>2026-08-26 12:33</td>
 <td>BG8SYW</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-13--9</td>
+<td>-13 / -9</td>
 </tr>
 
 <tr>
 <td>2026-08-26 12:20</td>
 <td>BA4UCC</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-16--22</td>
+<td>-16 / -22</td>
 </tr>
 
 <tr>
 <td>2026-08-26 12:18</td>
 <td>BI4MJX</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-11--19</td>
+<td>-11 / -19</td>
 </tr>
 
 <tr>
 <td>2026-08-24 23:54</td>
 <td>BA4OO</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-17--20</td>
+<td>-17 / -20</td>
 </tr>
 
 <tr>
 <td>2026-08-20 23:54</td>
 <td>BG7OO</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-9--25</td>
+<td>-9 / -25</td>
 </tr>
 
 <tr>
 <td>2026-08-20 23:44</td>
 <td>BI1HJR</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-13--23</td>
+<td>-13 / -23</td>
 </tr>
 
 <tr>
 <td>2026-08-20 23:43</td>
 <td>BG7BVI</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-7--14</td>
+<td>-7 / -14</td>
 </tr>
 
 <tr>
 <td>2026-08-19 15:07</td>
 <td>BI8SCC</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-17--11</td>
+<td>-17 / -11</td>
 </tr>
 
 <tr>
 <td>2026-08-19 14:54</td>
 <td>BV3VN</td>
+<td></td>
 <td>20m</td>
 <td>FT8</td>
-<td>-12--14</td>
+<td>-12 / -14</td>
 </tr>
 
 <tr>
 <td>2026-08-19 04:54</td>
 <td>JH4MGU</td>
+<td>日本</td>
 <td>15m</td>
 <td>FT8</td>
-<td>-10--16</td>
+<td>-10 / -16</td>
 </tr>
 
 <tr>
 <td>2026-08-18 23:45</td>
 <td>VR2VAZ</td>
+<td>中国香港</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-13--11</td>
+<td>-13 / -11</td>
 </tr>
 
 <tr>
 <td>2026-08-18 23:38</td>
 <td>BG5JGG</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-15--15</td>
+<td>-15 / -15</td>
 </tr>
 
 <tr>
 <td>2026-08-18 04:52</td>
 <td>BA7SAY</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-11--18</td>
+<td>-11 / -18</td>
 </tr>
 
 <tr>
 <td>2026-08-17 23:54</td>
 <td>BI4IWL</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-17--15</td>
+<td>-17 / -15</td>
 </tr>
 
 <tr>
 <td>2026-08-16 23:41</td>
 <td>BA4VDC</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-9--14</td>
+<td>-9 / -14</td>
 </tr>
 
 <tr>
 <td>2026-08-16 23:36</td>
 <td>8B81KB</td>
+<td></td>
 <td>20m</td>
 <td>FT8</td>
-<td>-11--23</td>
+<td>-11 / -23</td>
 </tr>
 
 <tr>
 <td>2026-08-16 14:41</td>
 <td>BG8TFC</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-5--19</td>
+<td>-5 / -19</td>
 </tr>
 
 <tr>
 <td>2026-08-16 14:39</td>
 <td>BV2NF</td>
+<td>中国台湾</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-5--13</td>
+<td>-5 / -13</td>
 </tr>
 
 <tr>
 <td>2026-08-07 05:05</td>
 <td>BD6KDG</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-11--14</td>
+<td>-11 / -14</td>
 </tr>
 
 <tr>
 <td>2026-08-06 04:55</td>
 <td>BA8BLJ</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-12--11</td>
+<td>-12 / -11</td>
 </tr>
 
 <tr>
 <td>2026-08-06 04:54</td>
 <td>BI8SSW</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-8--18</td>
+<td>-8 / -18</td>
 </tr>
 
 <tr>
 <td>2026-08-06 00:09</td>
 <td>BI3UPU</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-15--23</td>
+<td>-15 / -23</td>
 </tr>
 
 <tr>
 <td>2026-08-06 00:05</td>
 <td>BA8BLK</td>
+<td>中国</td>
 <td>20m</td>
 <td>FT8</td>
-<td>-10--19</td>
-</tr>
-
-<tr>
-<td>2026-08-05 23:56</td>
-<td>BD8SN</td>
-<td>20m</td>
-<td>FT8</td>
-<td>-8--18</td>
-</tr>
-
-<tr>
-<td>2026-08-05 23:16</td>
-<td>BG7IDX</td>
-<td>20m</td>
-<td>FT8</td>
-<td>-2--14</td>
+<td>-10 / -19</td>
 </tr>
 </tbody>
 </table>
