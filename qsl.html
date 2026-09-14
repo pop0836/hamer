@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BG9KJG QSL卡片交换说明，直寄地址，eQSL、QRZ Logbook支持。">
 <title>BG9KJG China</title>
 <style>
 
@@ -12,15 +13,33 @@
     box-sizing: border-box;
     font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
 }
+:root{
+    --bg-body:#0b1020;
+    --container-bg:#ffffff;
+    --text-color:#222;
+    --text-light:#555;
+    --border-color:#e4e9f0;
+    --tip-bg:#f0f6ff;
+    --footer-bg:#f7f9fc;
+}
+.dark-mode{
+    --bg-body:#050810;
+    --container-bg:#151b2b;
+    --text-color:#e5e7eb;
+    --text-light:#b0b8c4;
+    --border-color:#2c3448;
+    --tip-bg:#1b2b48;
+    --footer-bg:#192030;
+}
 body {
     position: relative;
-    background-color: #0b1020;
-    color: #222;
+    background-color: var(--bg-body);
+    color: var(--text-color);
     line-height: 1.7;
     padding: 20px 0;
     min-height: 100vh;
+    transition: 0.3s all;
 }
-
 /* 动态星空背景 */
 .stars {
     position: fixed;
@@ -38,9 +57,7 @@ body {
     background-position: 0 0, 40px 60px, 20px 80px;
     animation: starDrift 60s linear infinite;
 }
-
-.stars::before,
-.stars::after {
+.stars::before, .stars::after {
     content: "";
     position: absolute;
     left: 0;
@@ -49,7 +66,6 @@ body {
     height: 100%;
     pointer-events: none;
 }
-
 .stars::before {
     background:
         radial-gradient(white 1px, transparent 1px),
@@ -59,7 +75,6 @@ body {
     animation: starTwinkle 8s ease-in-out infinite;
     opacity: 0.6;
 }
-
 .stars::after {
     background:
         radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
@@ -67,33 +82,34 @@ body {
     animation: starDrift 40s linear infinite reverse;
     opacity: 0.5;
 }
-
 @keyframes starDrift {
     0% { transform: translate(0, 0); }
     100% { transform: translate(100px, 60px); }
 }
-
 @keyframes starTwinkle {
     0%, 100% { opacity: 0.6; }
     50% { opacity: 1; }
 }
-
 .container {
     position: relative;
     z-index: 1;
     max-width: 920px;
     margin: 0 auto;
-    background: #fff;
+    background: var(--container-bg);
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0,0,0, 0.4);
     overflow: hidden;
+    transition: 0.3s background;
 }
 .header-bar {
     background: linear-gradient(135deg, #2c4a70, #3a6090);
     color: #fff;
     padding: 22px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.header-bar h1 {
+.header-bar .title-wrap h1 {
     font-size: 28px;
     letter-spacing: 2px;
 }
@@ -101,6 +117,23 @@ body {
     opacity: 0.85;
     font-size: 15px;
     margin-top: 6px;
+}
+.theme-switch{
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    background:#fff2;
+    color:#fff;
+}
+.lang-switch{
+    margin-left:8px;
+    padding:6px 10px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    background:#fff2;
+    color:#fff;
 }
 .nav-bar {
     background: #233b58;
@@ -123,7 +156,7 @@ body {
 }
 .section {
     padding: 24px 30px;
-    border-bottom: 1px solid #e4e9f0;
+    border-bottom: 1px solid var(--border-color);
 }
 .section:last-child {
     border-bottom: none;
@@ -132,36 +165,41 @@ body {
     color: #2c4a70;
     font-size: 20px;
     margin-bottom: 14px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+.dark-mode .section h2{
+    color:#7cb3f0;
+}
+.lang-tag{
+    font-size:14px;
+    font-weight:normal;
+    opacity:0.65;
 }
 .tip-text {
-    background: #f0f6ff;
+    background: var(--tip-bg);
     padding: 10px 14px;
     border-left: 4px solid #4477bb;
     margin: 16px 0;
     font-size: 14px;
 }
-
-/* ===== 通联日志表格 强制边框 ===== */
-.log-table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #99a8bc;
+/* ===== 日志iframe容器 ===== */
+.qrz-log-wrap{
+    position:relative;
 }
-.log-table th {
-    border: 1px solid #99a8bc;
-    background-color: #e8eff8;
-    color: #2c4a70;
-    padding: 10px 8px;
+.qrz-loading{
+    padding:120px 20px;
+    text-align:center;
+    border:1px solid #99a8bc;
+    border-radius:6px;
 }
-.log-table td {
-    border: 1px solid #99a8bc;
-    padding: 9px 8px;
+.qrz-log-iframe {
+    width:100%;
+    height:720px;
+    border:1px solid #99a8bc;
 }
-.log-table tbody tr:nth-child(even) {
-    background-color: #f7f9fc;
-}
-
-/* ===== 相册样式修复 ===== */
+/* ===== 相册灯箱 ===== */
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -173,6 +211,11 @@ body {
     border-radius: 8px;
     overflow: hidden;
     background-color: #f8fafc;
+    cursor:pointer;
+}
+.dark-mode .photo-item{
+    background:#222938;
+    border-color:#374151;
 }
 .photo-item img {
     width: 100%;
@@ -183,18 +226,40 @@ body {
 .photo-caption {
     padding: 8px 10px;
     font-size:13px;
-    color:#444;
+    color:var(--text-color);
 }
-
+/* 灯箱弹窗 */
+.lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#000b;
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+.lightbox img{
+    max-width:95%;
+    max-height:95vh;
+}
+.lightbox .close{
+    position:absolute;
+    top:16px;
+    right:24px;
+    color:#fff;
+    font-size:32px;
+    cursor:pointer;
+}
 footer {
     text-align: center;
     padding: 16px;
     font-size: 13px;
-    color: #777;
-    background: #f7f9fc;
+    color: var(--text-light);
+    background: var(--footer-bg);
 }
 .note-small{
-    margin-top:12px;font-size:14px;color:#555;
+    margin-top:12px;font-size:14px;color:var(--text-light);
 }
 .list-group {
     list-style: none;
@@ -208,13 +273,37 @@ footer {
     color: #3a6090;
     font-weight: bold;
 }
-
+/* 返回顶部按钮 */
+#backTop{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:none;
+    background:#3a6090;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    z-index:100;
+    display:none;
+}
+/* 访问统计面板 */
+.visit-stat{
+    margin-top:12px;
+    font-size:13px;
+    color:var(--text-light);
+}
 @media (max-width: 768px) {
     body {
         padding: 10px 0;
     }
     .header-bar {
         padding: 16px 20px;
+        flex-direction:column;
+        gap:10px;
+        align-items:flex-start;
     }
     .section {
         padding: 18px 20px;
@@ -223,10 +312,8 @@ footer {
         padding: 10px 12px;
         font-size: 14px;
     }
-    .log-table th,
-    .log-table td {
-        padding: 5px 3px;
-        font-size: 11px;
+    .qrz-log-iframe {
+        height:520px;
     }
     .photo-item img {
         height:140px;
@@ -239,20 +326,28 @@ footer {
 <div class="stars"></div>
 <div class="container">
 <div class="header-bar">
-<h1>BG9KJG China</h1>
-<div class="sub-title">QRZ‑Style Personal Station Page | Amateur Radio</div>
+    <div class="title-wrap">
+        <h1 data-zh="BG9KJG China" data-en="BG9KJG China">BG9KJG China</h1>
+        <div class="sub-title" data-zh="QRZ‑Style Personal Station Page | Amateur Radio" data-en="QRZ‑Style Personal Station Page | Amateur Radio">QRZ‑Style Personal Station Page | Amateur Radio</div>
+    </div>
+    <div>
+        <button class="theme-switch" onclick="toggleDark()" data-zh="深色模式" data-en="Dark">深色模式</button>
+        <button class="lang-switch" onclick="switchLang()" data-zh="EN" data-en="中文">EN</button>
+    </div>
 </div>
 <div class="nav-bar">
-<a href="index.html" >首页</a>
-<a href="about.html" >关于</a>
-<a href="qsl.html" class="active">换卡 QSL</a>
-<a href="log.html" >通联日志</a>
-<a href="gallery.html" >相册</a>
+<a href="index.html"  data-zh="首页" data-en="Home">首页</a>
+<a href="about.html"  data-zh="关于" data-en="About">关于</a>
+<a href="qsl.html" class="active" data-zh="换卡 QSL" data-en="QSL">换卡 QSL</a>
+<a href="log.html"  data-zh="通联日志" data-en="Logbook">通联日志</a>
+<a href="gallery.html"  data-zh="相册" data-en="Gallery">相册</a>
+<a href="devices.html"  data-zh="设备详情" data-en="Devices">设备详情</a>
+<a href="awards.html"  data-zh="奖状" data-en="Awards">奖状</a>
 </div>
 
 <div class="section">
-<h2>QSL卡片交换说明</h2>
-<div class="tip-text">
+<h2 data-zh>QSL卡片交换说明</h2>
+<div class="tip-text" data-zh>
 请尽量使用回邮信封+邮票，直接寄来我会尽量回卡。
 </div>
 <ul style="padding-left:22px;">
@@ -262,16 +357,70 @@ footer {
 <li>QRZ：支持QRZ Logbook</li>
 </ul>
 <br>
-<p>邮寄地址：甘肃省天水市秦州区中心广场金龙大厦八楼  邮编：741000  李先生收</p>
+<p data-zh>邮寄地址：甘肃省天水市秦州区中心广场金龙大厦八楼  邮编：741000  李先生收</p>
 </div>
 <div class="section">
-<h2>换卡提示</h2>
-<p>1. 直寄请附带SAE回邮信封与足额邮票，无回邮条件不保证实卡回寄。</p>
-<p>2. FT‑8数字通联优先e‑QSL确认。</p>
-<p>3. 卡片处理周期：1‑3个月。</p>
+<h2 data-zh>换卡提示</h2>
+<p data-zh>1. 直寄请附带SAE回邮信封与足额邮票，无回邮条件不保证实卡回寄。</p>
+<p data-zh>2. FT‑8数字通联优先e‑QSL确认。</p>
+<p data-zh>3. 卡片处理周期：1‑3个月。</p>
 </div>
 
-<footer>BG9KJG China Amateur Radio Station</footer>
+<footer>
+    BG9KJG China Amateur Radio Station | Log data from QRZ.com Logbook
+    <div class="visit-stat">页面本地访问次数：<span id="visitCounter">0</span></div>
+</footer>
 </div>
+
+<script>
+//深色模式
+(function(){
+    const saved = localStorage.getItem('darkMode');
+    const body = document.body;
+    if(saved === '1') body.classList.add('dark-mode');
+    window.toggleDark = function(){
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', body.classList.contains('dark-mode')?'1':'0');
+    }
+})();
+//回到顶部
+window.addEventListener('scroll',function(){
+    const btn = document.getElementById('backTop');
+    if(!btn) return;
+    btn.style.display = window.scrollY>300?'block':'none';
+});
+function backToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+//相册灯箱
+function openLight(src){
+    const lb = document.getElementById('lightbox');
+    lb.querySelector('img').src=src;
+    lb.style.display='flex';
+}
+function closeLight(){
+    document.getElementById('lightbox').style.display='none';
+}
+//极简访问计数，存在localStorage，不上传服务器
+(function(){
+    let cnt = Number(localStorage.getItem('visitCount')||0)+1;
+    localStorage.setItem('visitCount',cnt);
+    const el = document.getElementById('visitCounter');
+    if(el) el.innerText = cnt;
+})();
+//双语切换简易实现
+let lang = localStorage.getItem('lang')||"zh";
+function switchLang(){
+    lang = lang==="zh"?"en":"zh";
+    localStorage.setItem('lang',lang);
+    document.querySelectorAll('[data-zh][data-en]').forEach(d=>{
+        d.innerText = lang==="zh"?d.dataset.zh:d.dataset.en;
+    })
+}
+</script>
+<div id="lightbox" class="lightbox" onclick="closeLight()">
+    <span class="close" onclick="closeLight()">&times;</span>
+    <img src="" alt="preview">
+</div>
+<button id="backTop" onclick="backToTop()">↑</button>
+
 </body>
 </html>
